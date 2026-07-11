@@ -1,5 +1,5 @@
 /**
- * Zona Norte Usados — interacciones del sitio.
+ * Bustos Cars — interacciones del sitio.
  *
  * 1) Efecto "odómetro": los precios y kilómetros (marcados con
  *    data-odometro) cuentan desde 0 hasta su valor real la primera

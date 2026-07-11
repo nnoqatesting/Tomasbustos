@@ -1,21 +1,14 @@
 {% extends "autos/base.html" %}
 {% load static %}
 
-{% block title %}Autos Seleccionados · Zona Norte Usados{% endblock %}
+{% block title %}Autos Seleccionados · Bustos Cars{% endblock %}
 
 {% block content %}
 
-  <section class="hero-catalogo">
-    <img src="{% static 'img/hero-golf.jpg' %}" alt="" class="hero-catalogo__img" aria-hidden="true">
-    <div class="hero-catalogo__overlay"></div>
-    <div class="hero-catalogo__contenido">
-      <span class="eyebrow">Catálogo</span>
-      <h1 class="mb-0">Autos Seleccionados</h1>
-      <p class="hero-catalogo__bajada">
-        Cada unidad pasa por una revisión minuciosa antes de estar disponible para la venta.
-      </p>
-    </div>
-  </section>
+  <div class="encabezado-seccion">
+    <span class="eyebrow">Catálogo</span>
+    <h1>Autos Seleccionados</h1>
+  </div>
 
   <!-- BUSCADOR POR MARCA -->
   <form method="get" class="buscador-form d-flex mb-4" style="max-width: 480px;">
@@ -95,5 +88,16 @@
       </ul>
     </nav>
   {% endif %}
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP (landing principal) -->
+  <a
+    href="https://wa.me/5491134199288?text=Hola%20Bustos%20Cars%2C%20quer%C3%ADa%20consultar%20por%20un%20auto"
+    class="boton-whatsapp"
+    target="_blank"
+    rel="noopener"
+    aria-label="Hablar por WhatsApp"
+  >
+    <i class="bi bi-whatsapp"></i>
+  </a>
 
 {% endblock %}

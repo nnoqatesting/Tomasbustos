@@ -219,71 +219,59 @@ hr { border-color: var(--hairline); opacity: 1; }
 .btn-close { filter: invert(1); }
 
 /* ============================================================
-   HERO DEL CATÁLOGO — foto sombreada integrada al fondo oscuro
+   BOTÓN FLOTANTE DE WHATSAPP
    ============================================================ */
-.hero-catalogo {
-  position: relative;
-  overflow: hidden;
-  min-height: 320px;
+.boton-whatsapp {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25d366;
+  color: #0b0c0e;
   display: flex;
   align-items: center;
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid var(--hairline);
+  justify-content: center;
+  font-size: 1.7rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.hero-catalogo__img {
-  position: absolute;
-  inset: 0;
+.boton-whatsapp:hover {
+  color: #0b0c0e;
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 576px) {
+  .boton-whatsapp {
+    right: 1rem;
+    bottom: 1rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================================
+   MAPA (contacto)
+   ============================================================ */
+.mapa-contacto {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radio);
+  overflow: hidden;
+  min-height: 320px;
+  height: 100%;
+}
+
+.mapa-contacto iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 65% 45%;
-  opacity: 0.55;
-  filter: grayscale(0.15) contrast(1.05) brightness(0.9);
-  /* Se desvanece hacia la izquierda para fundirse con el fondo,
-     junto al título "Autos Seleccionados" */
-  -webkit-mask-image: linear-gradient(100deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 55%);
-  mask-image: linear-gradient(100deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 55%);
-  animation: acercamiento-lento 22s ease-in-out infinite alternate;
-}
-
-@keyframes acercamiento-lento {
-  from { transform: scale(1); }
-  to   { transform: scale(1.08); }
-}
-
-.hero-catalogo__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--bg) 0%, rgba(20, 23, 28, 0.65) 40%, rgba(20, 23, 28, 0.15) 100%);
-}
-
-.hero-catalogo__contenido {
-  position: relative;
-  z-index: 1;
-  padding: 3rem 0;
-}
-
-.hero-catalogo__bajada {
-  color: var(--texto-tenue);
-  max-width: 32rem;
-  margin-top: 0.6rem;
-  font-size: 1rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-catalogo__img { animation: none; }
-}
-
-@media (max-width: 767px) {
-  .hero-catalogo { min-height: 260px; }
-  .hero-catalogo__img {
-    opacity: 0.35;
-    object-position: 70% 40%;
-  }
-  .hero-catalogo__overlay {
-    background: linear-gradient(180deg, var(--bg) 30%, rgba(20, 23, 28, 0.55) 100%);
-  }
+  min-height: 320px;
+  border: 0;
+  filter: grayscale(0.25) contrast(1.05);
 }
 
 /* ============================================================

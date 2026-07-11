@@ -1,4 +1,4 @@
-# Zona Norte Usados — Sitio de Concesionaria (Django)
+# Bustos Cars — Sitio de Concesionaria (Django)
 
 Proyecto Django listo para abrir en VS Code. Incluye:
 
@@ -18,6 +18,12 @@ Proyecto Django listo para abrir en VS Code. Incluye:
   `python manage.py seed_autos --reset`
 - Panel de administración de Django ya configurado (`/admin/`) para cargar autos
   reales (con fotos) y ver las propuestas de venta recibidas.
+- **Botón flotante de WhatsApp** en la landing principal (catálogo), que abre
+  una conversación con un mensaje predeterminado al número de contacto
+  (+54 9 11 3419-9288).
+- **Contacto** con el teléfono de Tomás, un enlace directo a WhatsApp, y el
+  mapa de Google Maps embebido (Quintana y Sobremonte, Virreyes) al lado de
+  la información.
 
 ## 1. Instalación
 
