@@ -1,0 +1,636 @@
+/* ============================================================
+   ZONA NORTE USADOS — sistema visual
+   Dirección: minimalista, corporativa, fondo oscuro tipo "sala de
+   entrega" de concesionaria premium. Acentos en bronce/latón,
+   tipografía condensada para títulos y monoespaciada para datos
+   técnicos (precio / km), como un tablero de instrumentos.
+   ============================================================ */
+
+:root {
+  /* Color */
+  --bg:            #14171c;   /* fondo principal, negro azulado, no puro negro */
+  --bg-elevado:    #1b1f26;   /* cards / superficies */
+  --bg-elevado-2:  #232830;   /* hover / inputs */
+  --hairline:      #2b303a;   /* bordes finos */
+  --hairline-suave:#22262d;
+  --texto:         #eae7e1;   /* blanco cálido */
+  --texto-tenue:   #9aa0aa;   /* gris azulado */
+  --texto-tenue-2: #6b7078;
+  --acento:        #c9a25c;   /* bronce / latón */
+  --acento-hover:  #ddb877;
+  --acento-suave:  rgba(201, 162, 92, 0.10);
+  --error:         #c9605a;
+  --exito:         #7a9b6e;
+
+  /* Tipografía */
+  --f-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --f-cuerpo:  "Inter", "Segoe UI", sans-serif;
+  --f-datos:   "IBM Plex Mono", "Consolas", monospace;
+
+  --radio: 3px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--texto);
+  font-family: var(--f-cuerpo);
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* ---------- AMBIENTE DE FONDO ----------
+   Dos brillos muy tenues en tono bronce/azul que se desplazan
+   despacio detrás de todo el sitio, para que el fondo oscuro no
+   se sienta plano ni estático. Es puramente decorativo: se fija
+   detrás del contenido y no interfiere con la lectura. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(700px circle at 15% 20%, rgba(201, 162, 92, 0.10), transparent 60%),
+    radial-gradient(800px circle at 85% 75%, rgba(90, 120, 150, 0.08), transparent 60%);
+  background-repeat: no-repeat;
+  background-size: 130% 130%;
+  animation: deriva-ambiente 34s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes deriva-ambiente {
+  0%   { background-position: 0% 0%, 100% 100%; }
+  50%  { background-position: 15% 10%, 85% 90%; }
+  100% { background-position: 5% 15%, 95% 85%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+h1, h2, h3, h4, h5, .titulo-display {
+  font-family: var(--f-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+
+a { color: var(--acento); }
+a:hover { color: var(--acento-hover); }
+
+.text-muted { color: var(--texto-tenue) !important; }
+
+hr { border-color: var(--hairline); opacity: 1; }
+
+/* ---------- EYEBROW / ETIQUETAS DE SECCIÓN ---------- */
+.eyebrow {
+  font-family: var(--f-datos);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--acento);
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar-concesionaria {
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--hairline);
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+.navbar-concesionaria .navbar-brand {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--texto) !important;
+  text-transform: uppercase;
+}
+
+.navbar-concesionaria .navbar-brand .marca-acento {
+  color: var(--acento);
+}
+
+.navbar-concesionaria .nav-link {
+  color: var(--texto-tenue) !important;
+  font-family: var(--f-cuerpo);
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.9rem !important;
+  transition: color .15s ease;
+}
+
+.navbar-concesionaria .nav-link:hover,
+.navbar-concesionaria .nav-link.activo {
+  color: var(--texto) !important;
+}
+
+.navbar-concesionaria .nav-link.activo {
+  border-bottom: 2px solid var(--acento);
+}
+
+.navbar-toggler {
+  border-color: var(--hairline);
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+.btn-vender {
+  background-color: transparent;
+  border: 1px solid var(--acento);
+  color: var(--acento) !important;
+  font-family: var(--f-cuerpo);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  border-radius: var(--radio);
+  padding: 0.5rem 1.2rem;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.btn-vender:hover {
+  background-color: var(--acento);
+  color: var(--bg) !important;
+}
+
+/* ============================================================
+   BOTONES GENERALES
+   ============================================================ */
+.btn-principal {
+  background-color: var(--acento);
+  border: 1px solid var(--acento);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  border-radius: var(--radio);
+  padding: 0.55rem 1.1rem;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+
+.btn-principal:hover {
+  background-color: var(--acento-hover);
+  border-color: var(--acento-hover);
+  color: var(--bg);
+}
+
+.btn-outline-linea {
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--texto);
+  border-radius: var(--radio);
+  font-weight: 500;
+  transition: border-color .15s ease;
+}
+
+.btn-outline-linea:hover {
+  border-color: var(--acento);
+  color: var(--texto);
+}
+
+/* ============================================================
+   MENSAJES / ALERTS
+   ============================================================ */
+.alert-success {
+  background-color: var(--acento-suave);
+  border: 1px solid var(--acento);
+  color: var(--texto);
+}
+
+.alert-warning {
+  background-color: rgba(201, 96, 90, 0.08);
+  border: 1px solid var(--error);
+  color: var(--texto);
+}
+
+.btn-close { filter: invert(1); }
+
+/* ============================================================
+   HERO DEL CATÁLOGO — foto sombreada integrada al fondo oscuro
+   ============================================================ */
+.hero-catalogo {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hero-catalogo__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 45%;
+  opacity: 0.55;
+  filter: grayscale(0.15) contrast(1.05) brightness(0.9);
+  /* Se desvanece hacia la izquierda para fundirse con el fondo,
+     junto al título "Autos Seleccionados" */
+  -webkit-mask-image: linear-gradient(100deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 55%);
+  mask-image: linear-gradient(100deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 55%);
+  animation: acercamiento-lento 22s ease-in-out infinite alternate;
+}
+
+@keyframes acercamiento-lento {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+.hero-catalogo__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, rgba(20, 23, 28, 0.65) 40%, rgba(20, 23, 28, 0.15) 100%);
+}
+
+.hero-catalogo__contenido {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 0;
+}
+
+.hero-catalogo__bajada {
+  color: var(--texto-tenue);
+  max-width: 32rem;
+  margin-top: 0.6rem;
+  font-size: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-catalogo__img { animation: none; }
+}
+
+@media (max-width: 767px) {
+  .hero-catalogo { min-height: 260px; }
+  .hero-catalogo__img {
+    opacity: 0.35;
+    object-position: 70% 40%;
+  }
+  .hero-catalogo__overlay {
+    background: linear-gradient(180deg, var(--bg) 30%, rgba(20, 23, 28, 0.55) 100%);
+  }
+}
+
+/* ============================================================
+   ENCABEZADO DE SECCIÓN (catálogo, etc.)
+   ============================================================ */
+.encabezado-seccion {
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.encabezado-seccion h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 0;
+}
+
+.contador-resultados {
+  font-family: var(--f-datos);
+  font-size: 0.85rem;
+  color: var(--texto-tenue);
+}
+
+/* ---------- BUSCADOR ---------- */
+.buscador-form {
+  border-bottom: 1px solid var(--hairline-suave);
+  transition: border-color .15s ease;
+}
+
+.buscador-form:focus-within {
+  border-color: var(--acento);
+}
+
+.buscador-form .form-control {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--texto);
+  font-family: var(--f-cuerpo);
+  font-size: 1rem;
+  padding: 0.7rem 0.2rem;
+}
+
+.buscador-form .form-control:focus {
+  background: transparent;
+  color: var(--texto);
+  box-shadow: none;
+}
+
+.buscador-form .form-control::placeholder {
+  color: var(--texto-tenue-2);
+}
+
+.buscador-form .btn {
+  background: transparent;
+  border: none;
+  color: var(--texto-tenue);
+  padding: 0.7rem 0.6rem;
+}
+
+.buscador-form .btn:hover { color: var(--acento); }
+
+/* ============================================================
+   CARDS DE AUTOS
+   ============================================================ */
+.card-auto {
+  background-color: var(--bg-elevado);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radio);
+  overflow: hidden;
+  height: 100%;
+  transition: border-color .18s ease, transform .18s ease;
+}
+
+.card-auto:hover {
+  border-color: var(--acento);
+  transform: translateY(-2px);
+}
+
+.card-auto .card-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--bg-elevado-2);
+}
+
+.card-auto .card-img-top {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.03);
+  transition: transform .4s ease;
+}
+
+.card-auto:hover .card-img-top {
+  transform: scale(1.04);
+}
+
+.card-auto .card-body {
+  padding: 1.25rem 1.35rem 1.4rem;
+}
+
+.card-auto .card-title {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.card-auto .card-subtitulo {
+  font-family: var(--f-datos);
+  font-size: 0.8rem;
+  color: var(--texto-tenue);
+  margin-bottom: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.card-auto .card-subtitulo .separador {
+  color: var(--hairline);
+  margin: 0 0.35rem;
+}
+
+.linea-precio {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 1px solid var(--hairline-suave);
+  padding-top: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.linea-precio .moneda {
+  font-family: var(--f-datos);
+  font-size: 0.78rem;
+  color: var(--texto-tenue);
+}
+
+.linea-precio .monto {
+  font-family: var(--f-datos);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--acento);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   FICHA TÉCNICA (detalle de auto) — estilo planilla / spec sheet
+   ============================================================ */
+.ficha-tecnica {
+  font-family: var(--f-datos);
+  font-size: 0.92rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.ficha-tecnica .fila {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--hairline-suave);
+}
+
+.ficha-tecnica .fila .etiqueta {
+  color: var(--texto-tenue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+}
+
+.ficha-tecnica .fila .valor {
+  color: var(--texto);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.precio-detalle {
+  font-family: var(--f-datos);
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--acento);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.caja-desperfectos {
+  background-color: var(--bg-elevado);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--acento);
+  border-radius: var(--radio);
+  padding: 1.3rem 1.5rem;
+}
+
+.caja-desperfectos p { color: var(--texto); margin-bottom: 0; }
+
+/* ============================================================
+   QUIÉNES SOMOS
+   ============================================================ */
+.seccion-familia {
+  background-color: var(--bg-elevado);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radio);
+  padding: 2.6rem;
+}
+
+.seccion-familia blockquote {
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--texto);
+  border-left: 3px solid var(--acento);
+  padding-left: 1.3rem;
+  line-height: 1.35;
+}
+
+.seccion-familia img {
+  filter: grayscale(0.3) contrast(1.05);
+  border: 1px solid var(--hairline);
+}
+
+/* ============================================================
+   FORMULARIO — VENDÉ TU AUTO
+   ============================================================ */
+.form-vender {
+  background-color: var(--bg-elevado);
+  border: 1px solid var(--hairline);
+}
+
+.form-vender label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+  margin-bottom: 0.4rem;
+}
+
+.form-vender .form-control,
+.form-vender .form-select {
+  background-color: var(--bg-elevado-2);
+  border: 1px solid var(--hairline);
+  color: var(--texto);
+  border-radius: var(--radio);
+  padding: 0.6rem 0.8rem;
+}
+
+.form-vender .form-control::placeholder { color: var(--texto-tenue-2); }
+
+.form-vender .form-control:focus,
+.form-vender .form-select:focus {
+  background-color: var(--bg-elevado-2);
+  color: var(--texto);
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+.form-vender .form-select {
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%239aa0aa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-vender .form-text { color: var(--texto-tenue-2); font-size: 0.78rem; }
+
+.imagen-vender {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radio);
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  filter: grayscale(0.25) contrast(1.05);
+}
+
+.imagen-vender-mobile { min-height: 160px; max-height: 200px; }
+
+@media (min-width: 992px) {
+  .imagen-vender-mobile { min-height: 320px; max-height: none; }
+}
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+.tarjeta-contacto {
+  background-color: var(--bg-elevado);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radio);
+  padding: 2.4rem;
+}
+
+.tarjeta-contacto h5 {
+  font-size: 0.95rem;
+  color: var(--texto-tenue);
+  margin-bottom: 0.4rem;
+}
+
+.tarjeta-contacto a { color: var(--texto); text-decoration: none; }
+.tarjeta-contacto a:hover { color: var(--acento); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer.footer-concesionaria {
+  background-color: var(--bg);
+  border-top: 1px solid var(--hairline);
+  color: var(--texto-tenue);
+  font-size: 0.85rem;
+}
+
+footer.footer-concesionaria a {
+  color: var(--texto-tenue);
+}
+
+footer.footer-concesionaria a:hover {
+  color: var(--acento);
+}
+
+/* ============================================================
+   PAGINACIÓN
+   ============================================================ */
+.pagination .page-link {
+  background-color: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--texto-tenue);
+}
+
+.pagination .page-link:hover {
+  border-color: var(--acento);
+  color: var(--texto);
+}
+
+.pagination .page-item.disabled .page-link {
+  background: transparent;
+  border-color: var(--hairline-suave);
+  color: var(--texto-tenue-2);
+}
+
+/* ============================================================
+   ACCESIBILIDAD
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

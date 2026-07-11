@@ -1,0 +1,49 @@
+{% extends "autos/base.html" %}
+
+{% block title %}Quiénes Somos · Zona Norte Usados{% endblock %}
+
+{% block content %}
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
+
+      <div class="text-center mb-4">
+        <span class="eyebrow">Desde 2006</span>
+        <h1 class="mb-0">Quiénes Somos</h1>
+      </div>
+
+      <div class="row g-4 align-items-center seccion-familia">
+        <div class="col-12 col-md-5 text-center">
+          <img
+            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=700&q=80"
+            alt="Familia de Zona Norte dedicada a la venta de autos"
+            class="img-fluid "
+          >
+        </div>
+        <div class="col-12 col-md-7">
+          <blockquote class="mb-3">
+            "Somos una familia de Zona Norte, San Fernando. Hace 20 años nos dedicamos a esto;
+            tenemos conocimiento a la hora de ver los vehículos y los elegimos minuciosamente
+            para la venta. Es por eso que sabemos lo que tenemos."
+          </blockquote>
+          <p class="text-muted mb-0">
+            <i class="bi bi-geo-alt-fill" style="color: var(--acento);"></i>
+            San Fernando, Zona Norte, Buenos Aires
+          </p>
+          <p class="text-muted">
+            <i class="bi bi-award-fill" style="color: var(--acento);"></i>
+            +20 años de trayectoria en la compra y venta de autos usados
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="{% url 'autos:catalogo' %}" class="btn btn-principal px-4 py-2">
+          Ver nuestros autos seleccionados
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}

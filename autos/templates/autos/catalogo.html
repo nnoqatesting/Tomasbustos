@@ -1,0 +1,99 @@
+{% extends "autos/base.html" %}
+{% load static %}
+
+{% block title %}Autos Seleccionados · Zona Norte Usados{% endblock %}
+
+{% block content %}
+
+  <section class="hero-catalogo">
+    <img src="{% static 'img/hero-golf.jpg' %}" alt="" class="hero-catalogo__img" aria-hidden="true">
+    <div class="hero-catalogo__overlay"></div>
+    <div class="hero-catalogo__contenido">
+      <span class="eyebrow">Catálogo</span>
+      <h1 class="mb-0">Autos Seleccionados</h1>
+      <p class="hero-catalogo__bajada">
+        Cada unidad pasa por una revisión minuciosa antes de estar disponible para la venta.
+      </p>
+    </div>
+  </section>
+
+  <!-- BUSCADOR POR MARCA -->
+  <form method="get" class="buscador-form d-flex mb-4" style="max-width: 480px;">
+    <input
+      type="text"
+      name="q"
+      class="form-control"
+      placeholder="Busca por marca"
+      value="{{ query }}"
+      autocomplete="off"
+    >
+    <button type="submit" class="btn">
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+
+  {% if query %}
+    <p class="contador-resultados mb-4">
+      Resultados para "{{ query }}" · <a href="{% url 'autos:catalogo' %}">ver todos los autos</a>
+    </p>
+  {% endif %}
+
+  <!-- LISTADO DE AUTOS -->
+  <div class="row g-4">
+    {% for auto in autos %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card card-auto">
+          <div class="card-img-wrap">
+            {% if auto.foto_principal %}
+              <img src="{{ auto.foto_principal.url }}" class="card-img-top" alt="{{ auto.marca }} {{ auto.modelo }}">
+            {% else %}
+              <img src="https://placehold.co/500x300/1b1f26/9aa0aa?text=Sin+foto" class="card-img-top" alt="Sin foto">
+            {% endif %}
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
+            <p class="card-subtitulo">
+              {{ auto.anio }}<span class="separador">/</span><span data-odometro="{{ auto.kilometros }}" data-sufijo=" km">0 km</span>
+            </p>
+            <div class="linea-precio">
+              <span class="moneda">ARS $</span>
+              <span class="monto" data-odometro="{{ auto.precio|floatformat:0 }}">0</span>
+            </div>
+            <a href="{% url 'autos:auto_detail' auto.pk %}" class="btn btn-principal mt-auto">
+              Información
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-warning">
+          No encontramos autos {% if query %}de la marca "{{ query }}"{% endif %}.
+          Probá con otra búsqueda o <a href="{% url 'autos:catalogo' %}">volvé al catálogo completo</a>.
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- PAGINACIÓN -->
+  {% if is_paginated %}
+    <nav class="mt-5">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Anterior</a>
+          </li>
+        {% endif %}
+        <li class="page-item disabled">
+          <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        </li>
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Siguiente</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+
+{% endblock %}

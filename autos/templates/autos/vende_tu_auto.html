@@ -1,0 +1,104 @@
+{% extends "autos/base.html" %}
+
+{% block title %}Vendé tu Auto · Zona Norte Usados{% endblock %}
+
+{% block content %}
+
+  <span class="eyebrow">Tasación sin cargo</span>
+  <h1 class="mb-2">Vendé tu Auto</h1>
+  <p class="text-muted mb-4">Contanos los datos de tu vehículo y un asesor te va a contactar a la brevedad.</p>
+
+  <div class="row g-5 align-items-stretch">
+
+    <!-- IMAGEN ILUSTRATIVA (en mobile va arriba del formulario, más chica) -->
+    <div class="col-12 col-lg-5 order-1 order-lg-2">
+      <img
+        src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=80"
+        alt="Vendé tu auto usado"
+        class="imagen-vender imagen-vender-mobile"
+      >
+    </div>
+
+    <!-- LADO IZQUIERDO: FORMULARIO -->
+    <div class="col-12 col-lg-7 order-2 order-lg-1">
+      <div class="p-4 p-md-5 form-vender h-100">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="{{ form.nombre_apellido.id_for_label }}" class="form-label">{{ form.nombre_apellido.label }}</label>
+            {{ form.nombre_apellido }}
+            {{ form.nombre_apellido.errors }}
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="{{ form.marca.id_for_label }}" class="form-label">Marca del vehículo *</label>
+              {{ form.marca }}
+              {{ form.marca.errors }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="{{ form.modelo.id_for_label }}" class="form-label">Modelo del vehículo</label>
+              {{ form.modelo }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="{{ form.anio.id_for_label }}" class="form-label">Año</label>
+              {{ form.anio }}
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="{{ form.combustible.id_for_label }}" class="form-label">Combustible</label>
+              {{ form.combustible }}
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="{{ form.kilometros.id_for_label }}" class="form-label">Kilómetros</label>
+              {{ form.kilometros }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="{{ form.valor_pretendido.id_for_label }}" class="form-label">{{ form.valor_pretendido.label }}</label>
+              {{ form.valor_pretendido }}
+              {{ form.valor_pretendido.errors }}
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="{{ form.tiene_deudas.id_for_label }}" class="form-label">¿Contiene deudas?</label>
+              {{ form.tiene_deudas }}
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="{{ form.tiene_vtv.id_for_label }}" class="form-label">¿Contiene VTV/RTO?</label>
+              {{ form.tiene_vtv }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="{{ form.telefono.id_for_label }}" class="form-label">Teléfono</label>
+              {{ form.telefono }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+              {{ form.email }}
+              {{ form.email.errors }}
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="{{ form.observaciones.id_for_label }}" class="form-label">Observaciones</label>
+            {{ form.observaciones }}
+            <div class="form-text" id="contador-observaciones">250 caracteres restantes</div>
+          </div>
+
+          <button type="submit" class="btn btn-vender px-4 py-2 fs-5">
+            <i class="bi bi-send-fill me-1"></i> Enviar propuesta
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}

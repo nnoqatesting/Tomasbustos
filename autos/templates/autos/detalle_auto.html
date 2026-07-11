@@ -1,0 +1,78 @@
+{% extends "autos/base.html" %}
+
+{% block title %}{{ auto.marca }} {{ auto.modelo }} {{ auto.anio }} · Zona Norte Usados{% endblock %}
+
+{% block content %}
+
+  <a href="{% url 'autos:catalogo' %}" class="text-decoration-none mb-4 d-inline-block eyebrow">
+    &larr; Volver al catálogo
+  </a>
+
+  <div class="row g-5">
+    <!-- FOTO -->
+    <div class="col-12 col-lg-6">
+      {% if auto.foto_principal %}
+        <img src="{{ auto.foto_principal.url }}" class="img-fluid w-100" style="border:1px solid var(--hairline); object-fit:cover; max-height: 420px;" alt="{{ auto.marca }} {{ auto.modelo }}">
+      {% else %}
+        <img src="https://placehold.co/700x420/1b1f26/9aa0aa?text=Sin+foto" class="img-fluid w-100" style="border:1px solid var(--hairline);" alt="Sin foto">
+      {% endif %}
+
+      {% if auto.fotos.all %}
+        <div class="d-flex gap-2 mt-2 flex-wrap">
+          {% for foto in auto.fotos.all %}
+            <img src="{{ foto.imagen.url }}" style="width: 90px; height: 70px; object-fit: cover; border:1px solid var(--hairline);" alt="Foto adicional">
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- DATOS PRINCIPALES -->
+    <div class="col-12 col-lg-6">
+      <span class="eyebrow">Ficha del vehículo</span>
+      <h1 class="mb-1">{{ auto.marca }} {{ auto.modelo }}</h1>
+      {% if auto.version %}<p class="text-muted mb-3" style="font-family: var(--f-datos); font-size:0.9rem;">{{ auto.version }}</p>{% endif %}
+
+      <div class="precio-detalle mb-4">
+        $<span data-odometro="{{ auto.precio|floatformat:0 }}">0</span>
+      </div>
+
+      <!-- FICHA TÉCNICA -->
+      <div class="ficha-tecnica">
+        <div class="fila"><span class="etiqueta">Marca</span><span class="valor">{{ auto.marca }}</span></div>
+        <div class="fila"><span class="etiqueta">Modelo</span><span class="valor">{{ auto.modelo }}</span></div>
+        <div class="fila"><span class="etiqueta">Año</span><span class="valor">{{ auto.anio }}</span></div>
+        <div class="fila"><span class="etiqueta">Combustible</span><span class="valor">{{ auto.get_combustible_display }}</span></div>
+        <div class="fila"><span class="etiqueta">Transmisión</span><span class="valor">{{ auto.get_transmision_display }}</span></div>
+        <div class="fila"><span class="etiqueta">Kilómetros</span><span class="valor" data-odometro="{{ auto.kilometros }}" data-sufijo=" km">0 km</span></div>
+        {% if auto.motor %}<div class="fila"><span class="etiqueta">Motor</span><span class="valor">{{ auto.motor }}</span></div>{% endif %}
+        {% if auto.color %}<div class="fila"><span class="etiqueta">Color</span><span class="valor">{{ auto.color }}</span></div>{% endif %}
+        <div class="fila"><span class="etiqueta">Puertas</span><span class="valor">{{ auto.puertas }}</span></div>
+      </div>
+
+      <a href="{% url 'autos:vende_tu_auto' %}" class="btn btn-vender mt-4 d-inline-block">
+        Consultar por este auto
+      </a>
+    </div>
+  </div>
+
+  <!-- DESCRIPCIÓN -->
+  {% if auto.descripcion %}
+    <div class="mt-5">
+      <span class="eyebrow">Descripción</span>
+      <p>{{ auto.descripcion|linebreaks }}</p>
+    </div>
+  {% endif %}
+
+  <!-- DETALLES / DESPERFECTOS -->
+  <div class="mt-4">
+    <span class="eyebrow">Detalles / Desperfectos a reparar</span>
+    <div class="caja-desperfectos mt-2">
+      {% if auto.detalles_desperfectos %}
+        {{ auto.detalles_desperfectos|linebreaks }}
+      {% else %}
+        <p class="mb-0 text-muted">Este vehículo no presenta desperfectos informados por el momento.</p>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

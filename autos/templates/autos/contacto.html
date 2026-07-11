@@ -1,0 +1,45 @@
+{% extends "autos/base.html" %}
+
+{% block title %}Contacto · Zona Norte Usados{% endblock %}
+
+{% block content %}
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <span class="eyebrow">Estamos para ayudarte</span>
+      <h1 class="mb-4">Contacto</h1>
+
+      <div class="tarjeta-contacto">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h5><i class="bi bi-geo-alt-fill" style="color: var(--acento);"></i> Ubicación</h5>
+            <p class="mb-0">San Fernando, Zona Norte<br>Buenos Aires, Argentina</p>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="bi bi-telephone-fill" style="color: var(--acento);"></i> Teléfono</h5>
+            <p class="mb-0">
+              <a href="tel:+541100000000">(011) 0000-0000</a>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="bi bi-envelope-fill" style="color: var(--acento);"></i> Email</h5>
+            <p class="mb-0">
+              <a href="mailto:info@zonanorteusados.com.ar">info@zonanorteusados.com.ar</a>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="bi bi-clock-fill" style="color: var(--acento);"></i> Horarios</h5>
+            <p class="mb-0">Lunes a Sábados de 9 a 19hs</p>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <p class="mb-0">
+          ¿Querés vender tu auto? <a href="{% url 'autos:vende_tu_auto' %}">Completá el formulario acá</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
