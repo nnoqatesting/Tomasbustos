@@ -19,11 +19,11 @@ AUTOS_DEMO = [
         detalles_desperfectos="Rayón leve en paragolpes trasero.",
     ),
     dict(
-        marca="Peugeot", modelo="208", anio=2017, version="1.6 5P Feline",
-        combustible="nafta", transmision="automatica", kilometros=91150,
-        color="Gris Aluminium", puertas=5, motor="1.6L 16v", precio=13800000,
-        descripcion="Versión tope de gama con techo panorámico y llantas de aleación.",
-        detalles_desperfectos="Falta funda de manija delantera derecha.",
+        marca="Peugeot", modelo="308", anio=2018, version="1.6 THP Allure",
+        combustible="nafta", transmision="manual", kilometros=87400,
+        color="Gris Hurricane", puertas=5, motor="1.6L Turbo", precio=15900000,
+        descripcion="Hatchback con motor turbo, terminación deportiva y llantas de aleación.",
+        detalles_desperfectos="Sin detalles a reparar.",
     ),
     dict(
         marca="Chevrolet", modelo="Onix", anio=2021, version="1.2 LT",

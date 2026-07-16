@@ -36,8 +36,12 @@ class AutoAdmin(admin.ModelAdmin):
 
 @admin.register(PropuestaVenta)
 class PropuestaVentaAdmin(admin.ModelAdmin):
-    list_display = ("nombre_apellido", "marca", "modelo", "anio", "valor_pretendido", "email", "telefono", "contactado", "creado")
-    list_filter = ("contactado", "combustible", "tiene_deudas", "tiene_vtv")
+    list_display = (
+        "nombre_apellido", "marca", "modelo", "anio", "valor_pretendido",
+        "titularidad", "tiene_infracciones", "monto_infracciones",
+        "email", "telefono", "contactado", "creado",
+    )
+    list_filter = ("contactado", "combustible", "titularidad", "tiene_deudas", "tiene_vtv", "tiene_infracciones")
     search_fields = ("nombre_apellido", "marca", "modelo", "email", "telefono")
     list_editable = ("contactado",)
     readonly_fields = ("creado",)

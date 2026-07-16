@@ -35,7 +35,8 @@
   <div class="row g-4">
     {% for auto in autos %}
       <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card card-auto">
+        <div class="card card-auto reveal-init">
+          {% if auto.destacado %}<span class="badge-destacado">Destacado</span>{% endif %}
           <div class="card-img-wrap">
             {% if auto.foto_principal %}
               <img src="{{ auto.foto_principal.url }}" class="card-img-top" alt="{{ auto.marca }} {{ auto.modelo }}">

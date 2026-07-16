@@ -18,9 +18,14 @@ Proyecto Django listo para abrir en VS Code. Incluye:
   `python manage.py seed_autos --reset`
 - Panel de administración de Django ya configurado (`/admin/`) para cargar autos
   reales (con fotos) y ver las propuestas de venta recibidas.
-- **Botón flotante de WhatsApp** en la landing principal (catálogo), que abre
-  una conversación con un mensaje predeterminado al número de contacto
-  (+54 9 11 3419-9288).
+- **Fotos reales** cargadas para 3 vehículos (Renault Duster Oroch, Peugeot 308,
+  Volkswagen Polo) mediante el comando `python manage.py asignar_fotos_demo`.
+- **Logo "Bustos Cars"** con tipografía distintiva (Big Shoulders Display) y una
+  animación de brillo/expansión de letras al pasar el cursor por encima.
+- **Cards del catálogo** con animación de aparición al hacer scroll (fade + subida
+  sutil) y una etiqueta "Destacado" para los autos marcados como tal.
+- Botón de WhatsApp con un pulso animado sutil para que se note más al scrollear,
+  visible en toda la landing principal aunque se scrollee.
 - **Contacto** con el teléfono de Tomás, un enlace directo a WhatsApp, y el
   mapa de Google Maps embebido (Quintana y Sobremonte, Virreyes) al lado de
   la información.
@@ -69,6 +74,8 @@ autos/
   admin.py               # Configuración del admin
   management/commands/
     seed_autos.py         # Carga los 10 autos ficticios (--reset para recargar)
+    asignar_fotos_demo.py # Asigna las 3 fotos reales (Oroch, 308, Polo)
+  fixtures_media/          # Fotos reales de origen (oroch.jpg, peugeot_308.jpg, polo.jpg)
   templates/autos/
     base.html            # Header + footer comunes a todo el sitio
     catalogo.html         # Autos Seleccionados + buscador

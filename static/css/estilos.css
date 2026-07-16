@@ -109,16 +109,34 @@ hr { border-color: var(--hairline); opacity: 1; }
 }
 
 .navbar-concesionaria .navbar-brand {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.04em;
+  font-family: "Big Shoulders Display", var(--f-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: 0.05em;
   color: var(--texto) !important;
   text-transform: uppercase;
+  transition: text-shadow 0.35s ease, letter-spacing 0.35s ease, color 0.35s ease;
+}
+
+.navbar-concesionaria .navbar-brand:hover {
+  letter-spacing: 0.09em;
+  text-shadow: 0 0 8px rgba(201, 162, 92, 0.45), 0 0 18px rgba(201, 162, 92, 0.25);
 }
 
 .navbar-concesionaria .navbar-brand .marca-acento {
   color: var(--acento);
+  transition: text-shadow 0.35s ease;
+}
+
+.navbar-concesionaria .navbar-brand:hover .marca-acento {
+  text-shadow: 0 0 10px rgba(201, 162, 92, 0.75), 0 0 20px rgba(201, 162, 92, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-concesionaria .navbar-brand,
+  .navbar-concesionaria .navbar-brand:hover {
+    transition: none;
+  }
 }
 
 .navbar-concesionaria .nav-link {
@@ -239,6 +257,25 @@ hr { border-color: var(--hairline); opacity: 1; }
   transition: transform .15s ease, box-shadow .15s ease;
 }
 
+.boton-whatsapp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  animation: pulso-whatsapp 2.6s ease-out infinite;
+}
+
+@keyframes pulso-whatsapp {
+  0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+  70%  { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boton-whatsapp::before { animation: none; }
+}
+
 .boton-whatsapp:hover {
   color: #0b0c0e;
   transform: scale(1.06);
@@ -342,7 +379,39 @@ hr { border-color: var(--hairline); opacity: 1; }
   border-radius: var(--radio);
   overflow: hidden;
   height: 100%;
+  position: relative;
   transition: border-color .18s ease, transform .18s ease;
+}
+
+.card-auto.reveal-init {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .5s ease, transform .5s ease, border-color .18s ease;
+}
+
+.card-auto.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-auto.reveal-init { opacity: 1; transform: none; transition: none; }
+}
+
+.card-auto .badge-destacado {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 2;
+  background-color: var(--acento);
+  color: var(--bg);
+  font-family: var(--f-datos);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radio);
 }
 
 .card-auto:hover {

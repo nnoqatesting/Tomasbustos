@@ -80,6 +80,11 @@ class PropuestaVenta(models.Model):
         ("no", "No"),
     ]
 
+    TITULARIDAD_CHOICES = [
+        ("titular", "Soy titular"),
+        ("no_titular_08", "No soy titular, tengo el 08"),
+    ]
+
     COMBUSTIBLE_CHOICES = [
         ("nafta", "Nafta"),
         ("gasoil", "Gasoil"),
@@ -93,8 +98,27 @@ class PropuestaVenta(models.Model):
     combustible = models.CharField(max_length=20, choices=COMBUSTIBLE_CHOICES, blank=True)
     kilometros = models.PositiveIntegerField(verbose_name="Kilómetros", blank=True, null=True)
     valor_pretendido = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Valor pretendido")
+    titularidad = models.CharField(
+        max_length=20,
+        choices=TITULARIDAD_CHOICES,
+        blank=True,
+        verbose_name="Titularidad",
+    )
     tiene_deudas = models.CharField(max_length=3, choices=SI_NO, verbose_name="¿Contiene deudas?")
     tiene_vtv = models.CharField(max_length=3, choices=SI_NO, verbose_name="¿Contiene VTV/RTO?")
+    tiene_infracciones = models.CharField(
+        max_length=3,
+        choices=SI_NO,
+        blank=True,
+        verbose_name="¿Contiene infracciones?",
+    )
+    monto_infracciones = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        verbose_name="Monto de las infracciones",
+    )
     telefono = models.CharField(max_length=30, blank=True)
     email = models.EmailField(verbose_name="Email")
     observaciones = models.TextField(max_length=250, blank=True, verbose_name="Observaciones")

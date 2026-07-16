@@ -10,7 +10,55 @@
 document.addEventListener("DOMContentLoaded", function () {
   iniciarOdometros();
   iniciarContadorObservaciones();
+  iniciarRevelado();
+  iniciarCampoInfracciones();
 });
+
+function iniciarCampoInfracciones() {
+  var selectInfracciones = document.getElementById("id_tiene_infracciones");
+  var campoMonto = document.getElementById("campo-monto-infracciones");
+  var inputMonto = document.getElementById("id_monto_infracciones");
+  if (!selectInfracciones || !campoMonto) return;
+
+  function actualizarVisibilidad() {
+    var mostrar = selectInfracciones.value === "si";
+    campoMonto.style.display = mostrar ? "" : "none";
+    if (!mostrar && inputMonto) {
+      inputMonto.value = "";
+    }
+  }
+
+  selectInfracciones.addEventListener("change", actualizarVisibilidad);
+  actualizarVisibilidad();
+}
+
+function iniciarRevelado() {
+  var tarjetas = document.querySelectorAll(".reveal-init");
+  if (!tarjetas.length) return;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    tarjetas.forEach(function (t) { t.classList.add("reveal-visible"); });
+    return;
+  }
+
+  var observador = new IntersectionObserver(
+    function (entradas, obs) {
+      entradas.forEach(function (entrada, indice) {
+        if (entrada.isIntersecting) {
+          var el = entrada.target;
+          var demora = (indice % 3) * 80;
+          setTimeout(function () {
+            el.classList.add("reveal-visible");
+          }, demora);
+          obs.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  tarjetas.forEach(function (t) { observador.observe(t); });
+}
 
 function iniciarOdometros() {
   var elementos = document.querySelectorAll("[data-odometro]");
